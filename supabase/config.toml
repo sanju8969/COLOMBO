@@ -1,0 +1,21 @@
+project_id = "rycqkgqsoqrybzvqdvew"
+
+[api]
+enabled = true
+port = 54321
+
+[db]
+port = 54322
+
+[studio]
+enabled = true
+port = 54323
+
+[auth]
+enabled = true
+
+[functions.delete-user]
+verify_jwt = false
+
+[functions.chat]
+verify_jwt = false

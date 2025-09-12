@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "lib": ["deno.ns", "deno.window"],
+    "types": ["https://deno.land/x/deno_supabse_types@0.0.1/index.d.ts"]
+  },
+  "imports": {
+    "https://deno.land/std@0.177.0/http/server.ts": "https://deno.land/std@0.177.0/http/server.ts",
+    "https://esm.sh/@supabase/supabase-js@2.1.0": "https://esm.sh/@supabase/supabase-js@2.1.0"
+  }
+}
