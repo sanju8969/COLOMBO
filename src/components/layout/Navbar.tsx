@@ -152,21 +152,16 @@ const Navbar = () => {
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent rounded-xl blur-sm group-hover:blur-none transition-all duration-300"></div>
                 <img 
-                  src={collegeLogo} 
-                  alt="St. Columba's College Logo" 
-                  className="h-14 w-14 object-contain relative z-10 drop-shadow-lg"
+                  src={collegeLogo}
+                  alt="St. Columba's College Logo"
+                  className="h-14 w-14 object-contain relative z-10 drop-shadow-lg mr-4"
                 />
               </div>
               <div className="flex flex-col">
                 <h1 className="text-2xl font-bold text-primary bg-gradient-to-r from-primary via-primary/80 to-primary bg-clip-text" >
-                  St. Columba's College
+                  
                 </h1>
-                <div className="flex items-center gap-2">
-                  <p className="text-sm text-muted-foreground font-semibold tracking-wide" >
-                    Hazaribagh • Since 1899
-                  </p>
-                  <div className="h-1 w-1 bg-primary rounded-full animate-pulse"></div>
-                </div>
+                
               </div>
             </Link>
 
