@@ -22,6 +22,7 @@ type EnrollmentRow = Database['public']['Tables']['enrollments']['Row'];
 interface StudentProfileData extends ProfileRow {
   student_id: string | null; // Can be null if not found in students table
   departments?: Pick<DepartmentRow, 'name' | 'code'>[] | null; // Changed to array again
+  current_semester: number | null;
 }
 
 interface CourseEnrollment extends EnrollmentRow {
@@ -41,7 +42,6 @@ interface Grade extends GradeRow {
   enrollments?: GradeEnrollmentData | null;
 }
 
-interface Notice extends NoticeRow {}
 
 const StudentDashboard: React.FC = () => {
   const [profile, setProfile] = useState<StudentProfileData | null>(null);
@@ -49,7 +49,7 @@ const StudentDashboard: React.FC = () => {
   const [enrollments, setEnrollments] = useState<CourseEnrollment[]>([]);
   const [assignments, setAssignments] = useState<Assignment[]>([]);
   const [grades, setGrades] = useState<Grade[]>([]);
-  const [notices, setNotices] = useState<Notice[]>([]);
+  const [notices, setNotices] = useState<NoticeRow[]>([]);
   const [loading, setLoading] = useState(true);
   const { toast } = useToast();
 
@@ -81,7 +81,7 @@ const StudentDashboard: React.FC = () => {
 
       const { data: studentData, error: studentError } = await supabase
         .from('students')
-        .select('student_id')
+        .select('student_id, current_semester')
         .eq('id', currentUserId)
         .single();
 
@@ -90,7 +90,7 @@ const StudentDashboard: React.FC = () => {
         throw studentError;
       }
 
-      setProfile({ ...profileData, student_id: studentData?.student_id || null });
+      setProfile({ ...profileData, student_id: studentData?.student_id || null, current_semester: studentData?.current_semester || null });
 
       // Fetch course enrollments (for dashboard overview)
       const { data: enrollmentsData, error: enrollmentsError } = await supabase
@@ -158,7 +158,16 @@ const StudentDashboard: React.FC = () => {
   };
 
   if (loading) {
-    return <div className="text-center py-8">Loading student dashboard...</div>;
+    return (
+      <div className="p-6">
+        <h1 className="text-3xl font-bold mb-6 animate-pulse">Loading Student Dashboard...</h1>
+        <div className="space-y-4">
+          <div className="h-4 bg-gray-300 rounded w-3/4 animate-pulse"></div>
+          <div className="h-4 bg-gray-300 rounded w-1/2 animate-pulse"></div>
+          <div className="h-4 bg-gray-300 rounded w-1/3 animate-pulse"></div>
+        </div>
+      </div>
+    );
   }
 
   if (!profile || !userId) {
@@ -172,7 +181,7 @@ const StudentDashboard: React.FC = () => {
         <TabsList className="grid w-full grid-cols-6">
           <TabsTrigger value="dashboard">Dashboard</TabsTrigger>
           <TabsTrigger value="profile">Profile</TabsTrigger>
-          <TabsTrigger value="courses">Courses</TabsTrigger>
+          {/* <TabsTrigger value="courses">Courses</TabsTrigger> */}
           <TabsTrigger value="assignments">Assignments</TabsTrigger>
           <TabsTrigger value="grades">Grades</TabsTrigger>
           <TabsTrigger value="notices">Notices</TabsTrigger>
@@ -190,6 +199,7 @@ const StudentDashboard: React.FC = () => {
               <p><strong>Student ID:</strong> {profile.student_id}</p>
               <p><strong>Email:</strong> {profile.email}</p>
               <p><strong>Department:</strong> {profile.departments?.[0]?.name || 'N/A'} ({profile.departments?.[0]?.code || 'N/A'})</p>
+              <p><strong>Semester:</strong> {profile.current_semester || 'N/A'}</p>
             </CardContent>
           </Card>
 

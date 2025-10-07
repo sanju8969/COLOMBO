@@ -40,9 +40,12 @@ export function useOptimisticUpdates<T extends { id: string; created_at?: string
     try {
       await actions.create(newItem);
       
-      // Refresh data after successful creation
+      // Optimistically update the state with the new item
       setState(prev => ({
         ...prev,
+        data: [optimisticItem, ...prev.data].sort((a, b) =>
+          new Date(b.created_at || '').getTime() - new Date(a.created_at || '').getTime()
+        ),
         loading: false,
         error: null,
       }));
@@ -85,8 +88,14 @@ export function useOptimisticUpdates<T extends { id: string; created_at?: string
     try {
       await actions.update(id, updates);
       
+      // Optimistically update the state with the updated item
       setState(prev => ({
         ...prev,
+        data: prev.data.map(item =>
+          item.id === id ? { ...item, ...updates } : item
+        ).sort((a, b) =>
+          new Date(b.created_at || '').getTime() - new Date(a.created_at || '').getTime()
+        ),
         loading: false,
         error: null,
       }));
@@ -127,10 +136,12 @@ export function useOptimisticUpdates<T extends { id: string; created_at?: string
     }));
 
     try {
-      await actions.delete(id);
+      await actions.delete(`?id=${id}`);
       
+      // Optimistically update the state by removing the item
       setState(prev => ({
         ...prev,
+        data: prev.data.filter(item => item.id !== id),
         loading: false,
         error: null,
       }));

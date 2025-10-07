@@ -49,12 +49,10 @@ const Gallery = () => {
     create: async (data) => {
       const { error } = await supabase.from('gallery').insert([data]);
       if (error) throw error;
-      await fetchImages();
     },
     update: async (id, updates) => {
       const { error } = await supabase.from('gallery').update(updates).eq('id', id);
       if (error) throw error;
-      await fetchImages();
     },
     delete: async (id) => {
       const { error } = await supabase.from('gallery').delete().eq('id', id);

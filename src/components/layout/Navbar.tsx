@@ -103,37 +103,37 @@ const Navbar = () => {
     <>
       {/* Enhanced Top Info Bar */}
       <div className="bg-gradient-to-r from-primary via-primary/90 to-primary text-primary-foreground py-3 text-sm hidden md:block relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent animate-pulse"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent animate-slide"></div>
         <div className="container-width flex justify-between items-center relative z-10">
           <div className="flex items-center gap-8">
             <div className="flex items-center gap-2 hover:scale-105 transition-transform duration-300">
               <div className="p-1 bg-white/10 rounded-full">
                 <Phone size={12} className="text-white" />
               </div>
-              <span className="font-medium tracking-wide" style={{ fontFamily: 'Inter, sans-serif' }}>+91-6546-272XXX</span>
+              <span className="font-medium tracking-wide font-inter">+91-6546-272XXX</span>
             </div>
             <div className="flex items-center gap-2 hover:scale-105 transition-transform duration-300">
               <div className="p-1 bg-white/10 rounded-full">
                 <Mail size={12} className="text-white" />
               </div>
-              <span className="font-medium tracking-wide" style={{ fontFamily: 'Inter, sans-serif' }}>admin@stcolumbascollege.edu.in</span>
+              <span className="font-medium tracking-wide font-inter">admin@stcolumbascollege.edu.in</span>
             </div>
             <div className="flex items-center gap-2 hover:scale-105 transition-transform duration-300">
               <div className="p-1 bg-white/10 rounded-full">
                 <MapPin size={12} className="text-white" />
               </div>
-              <span className="font-medium tracking-wide" style={{ fontFamily: 'Inter, sans-serif' }}>Hazaribagh, Jharkhand</span>
+              <span className="font-medium tracking-wide font-inter">Hazaribagh, Jharkhand</span>
             </div>
           </div>
           <div className="flex items-center gap-6">
             <div className="flex items-center gap-2 px-3 py-1 bg-white/10 rounded-full backdrop-blur-sm">
               <Award size={14} className="text-yellow-300" />
-              <span className="text-secondary font-semibold" style={{ fontFamily: 'Inter, sans-serif' }}>Est. 1899</span>
+              <span className="text-secondary font-semibold font-inter">Est. 1899</span>
             </div>
             <div className="h-4 w-px bg-white/30"></div>
             <div className="flex items-center gap-2 px-3 py-1 bg-green-500/20 rounded-full">
               <Sparkles size={14} className="text-green-300" />
-              <span className="font-semibold text-green-100" style={{ fontFamily: 'Inter, sans-serif' }}>NAAC Accredited</span>
+              <span className="font-semibold text-green-100 font-inter">NAAC Accredited</span>
             </div>
           </div>
         </div>
@@ -144,7 +144,7 @@ const Navbar = () => {
         isScrolled 
           ? 'bg-background/95 backdrop-blur-xl shadow-2xl border-b border-border/50' 
           : 'bg-background/100'
-      }`}>
+      }`} >
         <div className="container-width">
           <div className="flex items-center justify-between h-24">
             {/* Enhanced Logo */}
@@ -158,11 +158,11 @@ const Navbar = () => {
                 />
               </div>
               <div className="flex flex-col">
-                <h1 className="text-2xl font-bold text-primary bg-gradient-to-r from-primary via-primary/80 to-primary bg-clip-text" style={{ fontFamily: 'Playfair Display, serif' }}>
+                <h1 className="text-2xl font-bold text-primary bg-gradient-to-r from-primary via-primary/80 to-primary bg-clip-text" >
                   St. Columba's College
                 </h1>
                 <div className="flex items-center gap-2">
-                  <p className="text-sm text-muted-foreground font-semibold tracking-wide" style={{ fontFamily: 'Inter, sans-serif' }}>
+                  <p className="text-sm text-muted-foreground font-semibold tracking-wide" >
                     Hazaribagh • Since 1899
                   </p>
                   <div className="h-1 w-1 bg-primary rounded-full animate-pulse"></div>
@@ -182,11 +182,10 @@ const Navbar = () => {
                         ? 'text-white bg-gradient-to-r from-primary to-primary/80 shadow-lg scale-105'
                         : 'text-muted-foreground hover:text-primary hover:bg-primary/5 hover:scale-105'
                     }`}
-                    style={{ fontFamily: 'Inter, sans-serif' }}
                   >
                     {item.name}
                     {item.badge && (
-                      <span className="absolute -top-2 -right-2 bg-gradient-to-r from-red-500 to-pink-500 text-white text-xs px-2 py-1 rounded-full font-bold animate-bounce" style={{ fontFamily: 'Inter, sans-serif' }}>
+                      <span className="absolute -top-2 -right-2 bg-gradient-to-r from-red-500 to-pink-500 text-white text-xs px-2 py-1 rounded-full font-bold animate-bounce" >
                         {item.badge}
                       </span>
                     )}
@@ -207,22 +206,22 @@ const Navbar = () => {
                     size="sm" 
                     asChild
                     className="group hover:scale-105 transition-all duration-300 border-2 hover:border-primary hover:shadow-lg"
-                    style={{ fontFamily: 'Inter, sans-serif' }}
                   >
                     <Link to="/dashboard">
                       <LayoutDashboard size={16} className="group-hover:rotate-12 transition-transform duration-300" />
                       Dashboard
                     </Link>
                   </Button>
-                  <Button 
-                    variant="outline" 
-                    size="sm" 
-                    onClick={handleSignOut}
-                    className="group hover:scale-105 transition-all duration-300 border-2 hover:border-red-300 hover:shadow-lg hover:text-red-600"
-                    style={{ fontFamily: 'Inter, sans-serif' }}
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    asChild
+                    className="group hover:scale-105 transition-all duration-300 border-2 hover:border-primary hover:shadow-lg"
                   >
-                    <LogOut size={16} className="group-hover:-translate-x-1 transition-transform duration-300" />
-                    Sign Out
+                    <Link to="/gallery">
+                      <LayoutDashboard size={16} className="group-hover:rotate-12 transition-transform duration-300" />
+                      Gallery
+                    </Link>
                   </Button>
                 </div>
               ) : (
@@ -232,7 +231,6 @@ const Navbar = () => {
                     size="sm" 
                     asChild
                     className="group hover:scale-105 transition-all duration-300 border-2 hover:border-primary hover:shadow-xl"
-                    style={{ fontFamily: 'Inter, sans-serif' }}
                   >
                     <Link to="/auth">
                       <GraduationCap size={16} className="group-hover:rotate-12 transition-transform duration-300" />
@@ -281,13 +279,12 @@ const Navbar = () => {
                     }`}
                     style={{ 
                       animationDelay: `${index * 50}ms`,
-                      fontFamily: 'Inter, sans-serif'
                     }}
                   >
                     <span className="flex items-center gap-3">
                       {item.name}
                       {item.badge && (
-                        <span className="bg-gradient-to-r from-red-500 to-pink-500 text-white text-xs px-2 py-1 rounded-full font-bold animate-pulse" style={{ fontFamily: 'Inter, sans-serif' }}>
+                        <span className="bg-gradient-to-r from-red-500 to-pink-500 text-white text-xs px-2 py-1 rounded-full font-bold animate-bounce" >
                           {item.badge}
                         </span>
                       )}
@@ -303,22 +300,22 @@ const Navbar = () => {
                         size="sm" 
                         asChild
                         className="group hover:scale-105 transition-all duration-300 border-2 hover:border-primary hover:shadow-lg"
-                        style={{ fontFamily: 'Inter, sans-serif' }}
                       >
                         <Link to="/dashboard" onClick={() => setIsOpen(false)}>
                           <LayoutDashboard size={16} className="group-hover:rotate-12 transition-transform duration-300" />
                           Dashboard
                         </Link>
                       </Button>
-                      <Button 
-                        variant="outline" 
-                        size="sm" 
-                        onClick={() => { handleSignOut(); setIsOpen(false); }}
-                        className="group hover:scale-105 transition-all duration-300 border-2 hover:border-red-300 hover:shadow-lg hover:text-red-600"
-                        style={{ fontFamily: 'Inter, sans-serif' }}
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        asChild
+                        className="group hover:scale-105 transition-all duration-300 border-2 hover:border-primary hover:shadow-lg"
                       >
-                        <LogOut size={16} className="group-hover:-translate-x-1 transition-transform duration-300" />
-                        Sign Out
+                        <Link to="/gallery" onClick={() => setIsOpen(false)}>
+                          <LayoutDashboard size={16} className="group-hover:rotate-12 transition-transform duration-300" />
+                          Gallery
+                        </Link>
                       </Button>
                     </>
                   ) : (
@@ -327,7 +324,6 @@ const Navbar = () => {
                       size="sm" 
                       asChild
                       className="group hover:scale-105 transition-all duration-300 border-2 hover:border-primary hover:shadow-xl"
-                      style={{ fontFamily: 'Inter, sans-serif' }}
                     >
                       <Link to="/auth" onClick={() => setIsOpen(false)}>
                         <GraduationCap size={16} className="group-hover:rotate-12 transition-transform duration-300" />
